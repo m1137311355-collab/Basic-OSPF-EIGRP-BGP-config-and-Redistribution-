@@ -1,0 +1,31 @@
+R5#  (Basic OSPF , EIGRP , BGP  config and Redistribution  251123 1-v1)
+-------------------------------------------------------------------------------
+
+
+en
+conf t 
+host R5
+
+service password-encryption
+enable secret cisco
+
+int G0/5
+ip add 192.168.40.2 255.255.255.0
+ip ospf 1 a 0
+no sh 
+
+int G0/3
+ip add 192.168.50.1 255.255.255.0
+no sh 
+
+router bgp 64512
+	neighbor 192.168.50.2 remote-as 64513
+	address-family ipv4 unicast 
+	network 192.168.40.0 mask 255.255.255.0
+	network 192.168.50.0 mask 255.255.255.0
+	redistribute ospf 1
+
+router ospf 1
+ redistribute bgp 64512 subnets
+  redistribute ospf 1
+  

@@ -1,0 +1,20 @@
+R4#  (Basic OSPF , EIGRP , BGP  config and Redistribution  251123 1-v1)
+-------------------------------------------------------------------------------
+
+
+en
+conf t 
+host R4
+
+service password-encryption
+enable secret cisco
+
+int G0/4
+ip add 192.168.30.2 255.255.255.0
+ip ospf 1 a 0 
+no sh 
+
+int G0/5
+ip add 192.168.40.1 255.255.255.0
+ip ospf 1 a 0 
+no sh 
